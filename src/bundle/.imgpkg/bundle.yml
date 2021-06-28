@@ -1,0 +1,9 @@
+apiVersion: imgpkg.carvel.dev/v1alpha1
+kind: Bundle
+metadata:
+  name: <PACKAGE-NAME>
+authors:
+  - name: <AUTHOR NAME>
+    email: <AUTHOR-EMAIL>
+websites:
+  - url: <PACKAGE-NAME-URL>
