@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: registry-config
+  namespace: registry-package
+stringData:
+  values.yml: null

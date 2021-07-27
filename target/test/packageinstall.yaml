@@ -1,0 +1,15 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: registry-package
+  namespace: registry-package
+spec:
+  serviceAccountName: registry-sa
+  packageRef:
+    refName: registry.tkgdev.failk8s.com
+    versionSelection:
+      constraints: develop
+      prereleases: {}
+  values:
+  - secretRef:
+      name: registry-config

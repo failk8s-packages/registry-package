@@ -4,6 +4,6 @@
         "name": "registry",
         "domain": "tkgdev.failk8s.com",
         "displayName": "Docker registry",
-        "version": "1.0.0"
+        "version": "develop"
     }
 }
