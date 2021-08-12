@@ -12,12 +12,4 @@ BASE_DIR="$( cd -P "$( dirname "$SOURCE" )/.." && pwd )"
 
 source ${BASE_DIR}/hack/functions
 
-create-manifests
-echo "============"
-echo "Now you can test your package"
-echo "deploy your package:"
-echo "      kubectl apply -f $BASE_DIR/target/k8s"
-echo "test your package:"
-echo "      kubectl apply -f $BASE_DIR/target/test"
-echo "Watch progress"
-echo "      watch kubectl get packageinstall $_name-package -n $_name-package"
+push

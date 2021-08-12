@@ -34,12 +34,10 @@ The registry will create an ingress using the wildcard certificate available on 
 
 ## Develop checklist
 
+
 1. Update your [config.json](./config.json) with the package info
-2. Update your [vendir.yml](./src/bundle/vendir.yml) with your upstreams
-3. `vendir sync` in `src/bundle` to fetch your new upstream files
-4. Add [overlays](./src/bundle/config/overlays/) and [values](./src/bundle/config/values.yaml)
-5. Update your [bundle.yml](./src/bundle/.imgpkg/bundle.yml) file
-6. Test your bundle: `ytt -f config`
-7. Lock images used: `kbld -f . --imgpkg-lock-output .imgpkg/images.yml`
-8. Publish your bundle: `imgpkg push --bundle quay.io/failk8s/registry-package:develop --file .`. These steps can be done via [hack/build-package.sh](./hack/build-package.sh)
-9. Package up your k8s manifests and test in k8s [hack/package-manifests.sh](./hack/package-manifests.sh). The files will be in `target` folder.
+2. Add [overlays](./src/bundle/config/overlays/) and [values](./src/bundle/config/values.yaml)
+3. Test your bundle: `ytt --data-values-file src/example-values/minikube.yaml  -f target/bundle/config` providing a sample values file from [example-values](./src/examples-values/)
+4. Build your bundle `./hack/build.sh`
+5. Publish your bundle: `./hack/push.sh`
+6. Add it to the [failk8s-repo](https://github.com/failk8s-packages/failk8s-repo) and publish the new repo and test the package from there, or [test with local files](./target/test)

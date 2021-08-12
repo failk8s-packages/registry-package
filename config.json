@@ -2,8 +2,9 @@
     "registry": "quay.io/failk8s",
     "package": {
         "name": "registry",
-        "domain": "tkgdev.failk8s.com",
+        "domain": "dev.failk8s.com",
         "displayName": "Docker registry",
         "version": "develop"
-    }
+    },
+    "packages": []
 }
