@@ -1,6 +1,7 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:overlay", "overlay")
 
+#@ if/end data.values.create_namespace==True:
 #@overlay/insert
 ---
 apiVersion: v1

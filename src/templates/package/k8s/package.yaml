@@ -13,7 +13,6 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   name: #@ "{}.{}.{}".format(data.values.package.name, data.values.package.domain, version(data.values.package.version))
-  namespace: kapp-controller-packaging-global
 spec:
   refName: #@ "{}.{}".format(data.values.package.name, data.values.package.domain)
   version: #@ version(data.values.package.version)

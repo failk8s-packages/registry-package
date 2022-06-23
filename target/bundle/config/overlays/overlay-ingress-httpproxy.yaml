@@ -1,0 +1,28 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:assert", "assert")
+
+#@ if data.values.useContour:
+
+#@ secret = "{}/{}".format(data.values.registry.certmanager.secret.namespace,data.values.registry.certmanager.secret.name) if data.values.registry.certmanager.secret.namespace else data.values.registry.certmanager.secret.name
+
+#@overlay/match by=overlay.subset({"kind":"Ingress", "metadata": {"name": "registry"}})
+#@overlay/remove
+---
+
+#@overlay/match by=overlay.subset({"kind":"HTTPProxy", "metadata": {"name": "registry"}})
+---
+metadata:
+  #@overlay/match missing_ok=True
+  annotations:
+    #@ if/end data.values.registry.certmanager.clusterissuer:
+    cert-manager.io/cluster-issuer: #@ data.values.registry.certmanager.clusterissuer
+spec:
+  virtualhost:
+    fqdn: #@ "registry.{}".format(data.values.domain)
+    #@overlay/match missing_ok=True
+    tls:
+      #@overlay/match missing_ok=True
+      secretName: #@ secret
+
+#@ end

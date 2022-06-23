@@ -1,15 +1,30 @@
-#@data/values
+#@data/values-schema
 ---
 #! Namespace should be the same as cert-manager's namespace
 namespace: registry
-ingress:
-  ingress_class: contour
+create_namespace: True
+
+#! Which integrated services should be used (use True or False)
+useContour: False
+useCertManager: False
+useStorage: True
+
 domain: REPLACE_ME
 registry:
-  admin:
-    username: admin
-    password: admin123!
-  secrets:
-    #! Generate the secret by doing: `htpasswd -nb admin admin123!` or whatever user/password you want
-    htpasswd: 'admin:$2a$10$UJ9q77n9Vc0d8ppxomAxaeleIaeNX/5faYnt/PZLK20awaxSjxOgy'
-    hashared: replicated
+  #! If storage is provided (e.g. 20Gi), then it will create a PVC of that size
+  storage:
+    size: 10Gi
+    storage_class: default
+  ingress:
+    ingress_class: contour
+  certmanager:
+    secret:
+      name: "" #! TODO: Make this secret copied into this namespace
+      namespace: "" #! Specify namespace if TLS-Delegation is used
+    clusterissuer: "" #! Specify cluster Issuer if you want cert-manager to create the cert for you
+  auth:
+    type: any #! any, htpasswd
+    htpasswd:
+      users:
+        - name: USER
+          password: PASSWORD

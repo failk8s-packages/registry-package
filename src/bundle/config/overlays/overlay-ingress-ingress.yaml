@@ -1,0 +1,35 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:assert", "assert")
+
+#@ if not data.values.useContour:
+
+#@ secret = "{}".format(data.values.registry.certmanager.secret.name or "registry-tls-secret")
+
+#@overlay/match by=overlay.subset({"kind":"HTTPProxy", "metadata": {"name": "registry"}})
+#@overlay/remove
+---
+#@overlay/match by=overlay.subset({"kind":"Ingress", "metadata": {"name": "registry"}})
+---
+metadata:
+  #@overlay/match missing_ok=True
+  annotations:
+    #@overlay/match missing_ok=True
+    kubernetes.io/ingress.class: #@ data.values.registry.ingress.ingress_class
+    #@overlay/match missing_ok=True
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    #@ if/end data.values.registry.certmanager.clusterissuer:
+    cert-manager.io/cluster-issuer: #@ data.values.registry.certmanager.clusterissuer
+    #@ if/end data.values.registry.certmanager.secret.namespace:
+    projectcontour.io/tls-cert-namespace: #@ data.values.registry.certmanager.secret.namespace
+spec:
+  rules:
+    #@overlay/match by=overlay.index(0)
+    - host: #@ "registry.{}".format(data.values.domain)
+  #@overlay/match missing_ok=True
+  tls:
+    - hosts:
+        -  #@ "registry.{}".format(data.values.domain)
+      secretName: #@ secret
+
+#@ end

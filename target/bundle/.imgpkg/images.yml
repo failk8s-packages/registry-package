@@ -2,6 +2,17 @@
 apiVersion: imgpkg.carvel.dev/v1alpha1
 images:
 - annotations:
+    kbld.carvel.dev/id: marcnuri/htpasswd:latest
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: latest
+          url: marcnuri/htpasswd:latest
+  image: index.docker.io/marcnuri/htpasswd@sha256:db0a1d892d34cabd86927003ab3dc8366750247e98db0be250e1dc0847eeb568
+- annotations:
     kbld.carvel.dev/id: registry:2.7.1
-  image: index.docker.io/library/registry@sha256:121baf25069a56749f249819e36b386d655ba67116d9c1c6c8594061852de4da
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.7.1
+          url: registry:2.7.1
+  image: index.docker.io/library/registry@sha256:169211e20e2f2d5d115674681eb79d21a217b296b43374b8e39f97fcf866b375
 kind: ImagesLock

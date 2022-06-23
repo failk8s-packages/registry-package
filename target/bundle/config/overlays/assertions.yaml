@@ -6,3 +6,9 @@
 #@ else:
 #@   assert.fail("data.values.domain can not be empty or REPLACE_ME")
 #@ end
+
+#@ data.values.registry.auth.type=="any" or data.values.registry.auth.type=="htpasswd" or assert.fail("data.values.registry.auth.type must be one of any|htpasswd")
+
+#@ if data.values.registry.auth.type=="htpasswd":
+#@   data.values.registry.auth.htpasswd.users or assert.fail("no users provided. Provide data.values.registry.auth.htpasswd.users")
+#@ end

@@ -1,1 +1,17 @@
 #! Add your values here (without ytt annotations)
+domain: tanzu-devs.com
+
+#! Which integrated services should be used (use True or False)
+useContour: False
+useCertManager: True
+useStorage: True
+
+registry:
+  certmanager:
+    clusterissuer: sample
+  auth:
+    type: htpasswd
+    htpasswd:
+      users:
+        - name: admin
+          password: password

@@ -1,0 +1,34 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+#@ if data.values.useStorage:
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: #@ data.values.registry.storage.size
+#!  storageClassName: #@ data.values.registry.storage.storage_class
+
+#@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "registry"}})
+---
+spec:
+  template:
+    spec:
+      volumes:
+        #@overlay/match by="name"
+        - name: data
+          #@overlay/match missing_ok=True
+          persistentVolumeClaim:
+            #@overlay/match missing_ok=True
+            claimName: registry
+          #@overlay/remove
+          emptyDir: {}
+#@ end

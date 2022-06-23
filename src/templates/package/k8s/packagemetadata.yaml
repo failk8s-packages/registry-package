@@ -5,7 +5,6 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
   name: #@ "{}.{}".format(data.values.package.name, data.values.package.domain)
-  namespace: kapp-controller-packaging-global
 spec:
   # Human friendly name of the package (optional; string)
   #@ if/end hasattr(data.values.package, "displayName") and data.values.package.displayName:
