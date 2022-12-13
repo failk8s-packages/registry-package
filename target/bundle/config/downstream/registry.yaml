@@ -19,6 +19,8 @@ data:
       headers:
         X-Content-Type-Options:
           - nosniff
+    validation:
+      disabled: true
 ---
 apiVersion: v1
 kind: Service
