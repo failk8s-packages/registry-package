@@ -11,6 +11,10 @@ useStorage: True
 
 domain: REPLACE_ME
 registry:
+  #! Empty to use default image.
+  #! Use a different verion of distribution. See: https://github.com/distribution/distribution
+  #! For ORAS related work use (ghcr.io/oras-project/registry:v1.0.0-rc.4) See: https://github.com/oras-project/distribution
+  image: ""
   #! If storage is provided (e.g. 20Gi), then it will create a PVC of that size
   storage:
     size: 10Gi

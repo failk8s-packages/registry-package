@@ -1,0 +1,14 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+#@ if/end data.values.registry.image:
+
+#@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "registry"}}), expects="0+"
+---
+spec:
+  template:
+    spec:
+      containers:
+        #@overlay/match by="name"
+        - name: registry
+          image: #@ data.values.registry.image

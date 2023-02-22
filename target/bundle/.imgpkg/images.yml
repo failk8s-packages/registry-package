@@ -9,10 +9,10 @@ images:
           url: marcnuri/htpasswd:latest
   image: index.docker.io/marcnuri/htpasswd@sha256:db0a1d892d34cabd86927003ab3dc8366750247e98db0be250e1dc0847eeb568
 - annotations:
-    kbld.carvel.dev/id: registry:2.7.1
+    kbld.carvel.dev/id: registry:2.8.1
     kbld.carvel.dev/origins: |
       - resolved:
-          tag: 2.7.1
-          url: registry:2.7.1
-  image: index.docker.io/library/registry@sha256:169211e20e2f2d5d115674681eb79d21a217b296b43374b8e39f97fcf866b375
+          tag: 2.8.1
+          url: registry:2.8.1
+  image: index.docker.io/library/registry@sha256:3f71055ad7c41728e381190fee5c4cf9b8f7725839dcf5c0fe3e5e20dc5db1fa
 kind: ImagesLock
